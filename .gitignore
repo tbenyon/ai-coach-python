@@ -1,0 +1,7 @@
+students_resources/coaching_app.db
+.idea/
+experimentation
+**/.env
+__pycache__/
+*.pyc
+venv/
