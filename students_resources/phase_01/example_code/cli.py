@@ -19,10 +19,10 @@ def handle_get_user():
 
     if user:
         print(f"\nUser found:")
-        print(f"ID: {user[0]}")
-        print(f"Name: {user[1]}")
-        print(f"Age: {user[2]}")
-        print(f"Email: {user[3]}")
+        print(f"ID: {user['id']}")
+        print(f"Name: {user['name']}")
+        print(f"Age: {user['age']}")
+        print(f"Email: {user['email']}")
     else:
         print("User not found!")
 

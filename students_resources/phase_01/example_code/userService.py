@@ -3,11 +3,11 @@ User Service
 Functions to interact with the users table
 """
 
-import sqlite3
+from db import get_db_connection
 
 def add_user(name, age, email):
     """Add a new user to the database"""
-    conn = sqlite3.connect('coaching_app.db')
+    conn = get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute('''
@@ -21,7 +21,7 @@ def add_user(name, age, email):
 
 def get_user_by_email(email):
     """Get a user by their email address"""
-    conn = sqlite3.connect('coaching_app.db')
+    conn = get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute('''
