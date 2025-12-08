@@ -27,6 +27,27 @@ def handle_get_user():
     else:
         print("User not found!")
 
+def handle_get_user_by_id():
+    """Handle getting a user by ID"""
+    user_id = input("Enter user ID: ")
+
+    try:
+        user_id = int(user_id)
+    except ValueError:
+        print("❌ User ID must be a number!")
+        return
+
+    user = get_user_by_id(user_id)
+
+    if user:
+        print(f"\nUser found:")
+        print(f"ID: {user[0]}")
+        print(f"Name: {user[1]}")
+        print(f"Age: {user[2]}")
+        print(f"Email: {user[3]}")
+    else:
+        print("User not found!")
+
 def handle_generate_feedback():
     """Handle generating AI feedback for a user"""
     user_id = input("Enter user ID: ")
@@ -52,9 +73,9 @@ def handle_generate_feedback():
     if age < 5:
         prompt = f"Generate constructive coaching feedback for a toddler named {name}. Encourage them to get more crawling exercise and cut down on the baby food that has less protein."
     else:
-        prompt = f"Generate constructive coaching feedback for a user named {name}. Focus on personal development and goal setting."
+        prompt = f"Generate constructive coaching feedback for a user named {name}. Include basic workout recommendations (strength training, cardio, flexibility) and emphasize the importance of eating more protein for muscle recovery and growth."
 
-    prompt += "Keep the feedback short."
+    prompt += " Keep the feedback short and motivational."
 
     try:
         feedback = generate_response(prompt)
@@ -73,8 +94,9 @@ def main_menu():
         print("\n=== Coaching App ===")
         print("1. Add a user")
         print("2. Get user by email")
-        print("3. Generate AI feedback for user")
-        print("4. Exit")
+        print("3. Get user by ID")
+        print("4. Generate AI feedback for user")
+        print("5. Exit")
 
         choice = input("\nEnter your choice: ")
 
@@ -83,8 +105,10 @@ def main_menu():
         elif choice == "2":
             handle_get_user()
         elif choice == "3":
-            handle_generate_feedback()
+            handle_get_user_by_id()
         elif choice == "4":
+            handle_generate_feedback()
+        elif choice == "5":
             print("Goodbye!")
             break
         else:

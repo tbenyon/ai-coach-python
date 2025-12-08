@@ -66,7 +66,8 @@ The project is divided into phases, with dedicated resources for teachers and st
 
 - Python 3.x
 - pip3 (Python package manager)
-- OpenAI API key
+- OpenAI API key (required for AI feedback features in Phase 2+)
+  - Get your API key from [OpenAI Platform](https://platform.openai.com/api-keys)
 
 ### Installation
 
@@ -76,11 +77,15 @@ The project is divided into phases, with dedicated resources for teachers and st
 pip3 install openai python-dotenv
 ```
 
-2. Create a `.env` file in your project directory and add your OpenAI API key:
+2. **Configure your OpenAI API key:**
+
+Create a `.env` file in your working directory (the folder where you're running the Python code) and add your API key:
 
 ```
 OPEN_AI_ACCESS_KEY=your_api_key_here
 ```
+
+**Important:** The `.env` file must be in the same directory as your Python files (e.g., `cli.py`). Never commit this file to version control as it contains your private API key.
 
 ## Usage
 
