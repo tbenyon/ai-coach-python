@@ -157,4 +157,41 @@ This will:
     - Allow users to log for different dates
     - 
       - Allo
-      - 
+
+# Enrichment Day Presentation
+1) Introduction
+2) Key Words / Concepts
+   1) Python
+   2) Database
+      1) SQLite
+      2) Table
+      3) Record
+      4) CRUD
+   3) API
+      1) Endpoint
+      2) Request / Response
+      3) JSON
+      4) API Key
+   4) Library
+   5) AI
+      1) LLM (Large Language Model)
+      2) Prompt Engineering
+      3) Prompt Injection Attack - when someone tricks an AI into doing something it shouldn't
+3) Discuss what we could achieve in the day - goal 80% coding 20% theory/discussion
+   1) Talking Points / Demos
+      1) Topics in keywords
+      2) Discuss roles available in software development companies and salaries
+      3) Demo Claude Code (AI Tool for writing code)
+      4) Q&A - 
+   2) Practical Project - making an AI Coaching App
+      1) Phase 1 - Database and User Management
+      2) Phase 2 - AI Integration
+      3) Phase 3 - Workout Logging and Feedback
+4) Get started
+   1) Demo Check-Ins AI feature that My PT Hub have just released
+   2) Demo seeding the database and running the CLI app
+   3) Let students get started with Phase 1 demo code
+
+# Tom To Do:
+- Form for questions
+- Slides for presentation
