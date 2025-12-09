@@ -8,34 +8,50 @@ In this phase, you'll set up your fitness tracking application and explore how i
 
 2. Open a terminal and navigate to your copied folder
 
-3. Run the database setup script to create the database and add sample data:
-   ```bash
-   python3 db.py
-   ```
+3. Run `db.py` to create the database and add sample data (see helper box below)
 
 4. Open the `.env` file that was created and replace `your_api_key_here` with the API key provided by your teacher
+
+---
+
+> **How do I run a Python script?**
+>
+> There are several ways to run Python scripts. Here are the most common:
+>
+> **Option 1: Terminal / Command Prompt**
+> - Open Terminal (Mac/Linux) or Command Prompt (Windows)
+> - Navigate to your folder using `cd path/to/your/folder`
+> - Run: `python3 db.py` (or `python db.py` on Windows)
+>
+> **Option 2: VS Code**
+> - Open your folder in VS Code
+> - Open the built-in terminal (View → Terminal, or press Ctrl+`)
+> - Run: `python3 db.py`
+> - Or right-click the file and select "Run Python File"
+>
+> **Option 3: IDLE (comes with Python)**
+> - Open IDLE from your applications
+> - Go to File → Open and select your Python file
+> - Press F5 or go to Run → Run Module
+>
+> **python vs python3**
+> - On **Mac/Linux**: Use `python3`
+> - On **Windows**: Usually just `python` works
+> - If one doesn't work, try the other!
+
+---
 
 ## Running the Application
 
 ### Trainer App
 
-Run the trainer CLI:
-```bash
-python3 trainer_cli.py
-```
-
-Try these options:
+Run `trainer_cli.py` and try these options:
 - **Option 1**: View all clients
 - **Option 2**: Get recent workouts for a client (try client ID: 1)
 
 ### Client App
 
-Run the client CLI:
-```bash
-python3 client_cli.py
-```
-
-Try these options:
+Run `client_cli.py` and try these options:
 - **Option 1**: Login (username: `tom`, password: `sixseven`)
 - **Option 2**: Log a new workout
 

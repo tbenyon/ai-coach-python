@@ -44,7 +44,7 @@ Sets up database tables and adds sample data. Safe to run multiple times.
 - **Adds sample data:** 5 workouts and 5 nutrition logs
 - **Creates:** `.env` template file
 
-**Run with:** `python3 db.py`
+**Run with:** `python3 db.py` (or `python db.py` on Windows)
 
 ---
 
@@ -106,7 +106,7 @@ Saves a new workout to the database.
 
 **Purpose:** Command-line interface for trainers.
 
-**Run with:** `python3 trainer_cli.py`
+**Run with:** `python3 trainer_cli.py` (or `python trainer_cli.py` on Windows)
 
 ### Methods
 
@@ -156,7 +156,7 @@ Handles the AI feedback menu option.
 
 **Purpose:** Command-line interface for clients.
 
-**Run with:** `python3 client_cli.py`
+**Run with:** `python3 client_cli.py` (or `python client_cli.py` on Windows)
 
 ### Global Variable
 
