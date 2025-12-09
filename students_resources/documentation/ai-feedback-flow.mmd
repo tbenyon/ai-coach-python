@@ -1,0 +1,41 @@
+flowchart TD
+    subgraph CLI["<b>trainer_cli.py</b>"]
+        A["User selects option 4<br/><i>'Generate AI feedback'</i>"] --> B["<b>handle_generate_feedback()</b><br/>Asks for client ID"]
+        B --> C["<b>get_client_by_id(client_id)</b><br/><i>Check client exists</i>"]
+        C --> D{Client found?}
+        D -->|No| E["Print error:<br/><code>No client found with ID...</code>"]
+        D -->|Yes| F["<b>get_recent_workouts(client_id)</b><br/><i>Fetch workout data</i>"]
+        F --> G["<b>json.dumps(workouts, indent=2)</b><br/><i>Convert list to JSON string</i>"]
+        G --> H["<b>generate_feedback(client_name, workouts_json)</b>"]
+        H --> I["Build prompt string:<br/><code>f'''You are a friendly fitness coach...'''</code>"]
+        I --> J["<b>call_ai(prompt)</b>"]
+        J --> K["Display AI response to user"]
+    end
+
+    subgraph SERVICE["<b>trainer_service.py</b>"]
+        C --> L["<code>cursor.execute('''<br/>SELECT ... FROM clients<br/>WHERE id = ?''')</code>"]
+        L --> DB[(coaching_app.db)]
+        DB --> L
+        F --> M["<code>cursor.execute('''<br/>SELECT ... FROM workout_log<br/>WHERE client_id = ?<br/>ORDER BY date_time DESC''')</code>"]
+        M --> DB
+    end
+
+    subgraph AI["<b>ai_service.py</b>"]
+        J --> N["<b>get_api_key()</b><br/><i>Load from .env file</i>"]
+        N --> O{API key exists?}
+        O -->|No| P["Return <code>None</code><br/><i>Shows error to user</i>"]
+        O -->|Yes| Q["<b>urllib.request.Request()</b><br/><i>Build HTTP POST request</i>"]
+        Q --> R["Send to:<br/><code>api.openai.com/v1/chat/completions</code>"]
+        T["Parse JSON response:<br/><code>response['choices'][0]['message']['content']</code>"] --> K
+    end
+
+    subgraph OPENAI["<b>OpenAI API</b><br/>(External Service)"]
+        S["Process prompt and<br/>generate response"]
+    end
+
+    R --> S
+    S --> T
+
+    subgraph ENV["<b>.env file</b>"]
+        N -.->|"Reads"| U["<code>OPEN_AI_ACCESS_KEY=sk-...</code>"]
+    end

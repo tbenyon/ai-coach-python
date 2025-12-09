@@ -33,6 +33,7 @@ python-ai-enrichment/
 ├── full-example-project/     # Complete working example (teacher reference)
 └── students_resources/       # DISTRIBUTE TO STUDENTS
     ├── example_code/         # Starter code (copy this folder)
+    ├── documentation/        # Reference materials and diagrams
     ├── phase_01.md           # Setup and enable AI feedback
     ├── phase_02.md           # Add nutrition tracking (trainer)
     ├── phase_03.md           # Add nutrition to AI feedback
@@ -92,29 +93,42 @@ Choose from additional challenges at different difficulty levels:
 
 ## Internal Tools
 
-### Generate Instruction PDFs
+### Generate Student Resources
 
-Convert all markdown files in students_resources to PDF format.
+Converts source files in `students_resources/` to distributable formats:
+- **Markdown files (.md)** → PDF documents
+- **Mermaid diagrams (.mmd)** → PNG images
 
-This requires installing some Python packages. We use a "virtual environment" (venv) to keep these packages separate from your system Python:
+#### Dependencies
 
+**Python packages** (for PDF generation):
 ```bash
-# Create a virtual environment (only need to do this once)
+# Create and activate a virtual environment
 python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# Activate the virtual environment
-# On Mac/Linux:
-source venv/bin/activate
-# On Windows:
-# venv\Scripts\activate
-
-# Install the required packages (only need to do this once)
+# Install packages
 pip install markdown weasyprint
-
-# Run the converter
-python3 internal_tools/generate_instruction_pdfs.py
 ```
 
-**Note:** Each time you open a new terminal to run the converter, you'll need to activate the venv again with `source venv/bin/activate` before running the script.
+**Node.js package** (for diagram generation):
+```bash
+npm install -g @mermaid-js/mermaid-cli
+```
 
-This will generate PDF versions alongside each markdown file in students_resources.
+#### Running the Generator
+
+```bash
+# Activate the virtual environment first
+source venv/bin/activate
+
+# Run the generator
+python3 internal_tools/generate_resources.py
+```
+
+This will:
+- Find all `.mmd` files and convert them to PNG images
+- Find all `.md` files and convert them to PDFs
+- Place generated files alongside the source files
+
+**Note:** The script will warn you if any dependencies are missing and continue with what's available.
