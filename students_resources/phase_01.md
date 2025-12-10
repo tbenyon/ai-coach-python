@@ -6,11 +6,9 @@ In this phase, you'll set up your fitness tracking application and explore how i
 
 1. Copy the `example_code` folder to your working directory
 
-2. Open a terminal and navigate to your copied folder
+2. Run `db.py` to create the database and add sample data (see helper box below)
 
-3. Run `db.py` to create the database and add sample data (see helper box below)
-
-4. Open the `.env` file that was created and replace `your_api_key_here` with the API key provided by your teacher
+3. If the `.env` file does not already contain an API key, open it and replace `your_api_key_here` with the API key provided by your teacher
 
 ---
 

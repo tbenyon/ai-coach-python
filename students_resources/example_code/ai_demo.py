@@ -1,12 +1,3 @@
-"""
-ai_demo.py - Simple AI Demo
-
-A quick demonstration of how to use the AI service.
-Run this file to see the AI generate a poem!
-
-Run this file with: python3 ai_demo.py (or python ai_demo.py on Windows)
-"""
-
 # Import our AI service
 from ai_service import call_ai
 
@@ -45,3 +36,22 @@ def main():
 # Run main() when this file is executed directly
 if __name__ == "__main__":
     main()
+
+
+# ============================================================
+# DISCUSSION QUESTIONS
+# ============================================================
+# While you wait for others to catch up, think about:
+#
+# 1. Look at the code in this file - what do you think call_ai(prompt) does?
+#
+# 2. What would happen if you changed the prompt to ask for something different?
+#    (Try it!)
+#
+# 3. Where do you think the call_ai function actually lives?
+#    (Hint: look at the import at the top)
+#
+# 4. What do you think happens inside call_ai? How does your code "talk" to
+#    the AI?
+#
+# 5. Why do we check "if response is None"? What could go wrong?

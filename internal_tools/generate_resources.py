@@ -211,14 +211,12 @@ def main():
         print()
 
     if not MERMAID_AVAILABLE and not PDF_AVAILABLE:
-        print("Error: No conversion tools available!")
-        return
+        print("Warning: No conversion tools available - will only list files")
+        print()
 
-    # Find all mermaid files
-    mmd_files = find_files(repo_root, '.mmd') if MERMAID_AVAILABLE else []
-
-    # Find all markdown files
-    md_files = find_files(repo_root, '.md') if PDF_AVAILABLE else []
+    # Find all files (always find, even if we can't convert)
+    mmd_files = find_files(repo_root, '.mmd')
+    md_files = find_files(repo_root, '.md')
 
     # Summary
     print(f"Found {len(mmd_files)} mermaid diagram(s)")
@@ -228,31 +226,37 @@ def main():
     # Convert mermaid diagrams
     if mmd_files:
         print("=" * 50)
-        print("Converting Mermaid diagrams to PNG...")
-        print()
+        if MERMAID_AVAILABLE:
+            print("Converting Mermaid diagrams to PNG...")
+            print()
 
-        mmd_success = 0
-        for mmd_file in sorted(mmd_files):
-            if convert_mermaid_to_png(mmd_file):
-                mmd_success += 1
+            mmd_success = 0
+            for mmd_file in sorted(mmd_files):
+                if convert_mermaid_to_png(mmd_file):
+                    mmd_success += 1
 
-        print()
-        print(f"Diagrams: {mmd_success}/{len(mmd_files)} converted")
+            print()
+            print(f"Diagrams: {mmd_success}/{len(mmd_files)} converted")
+        else:
+            print("Skipping Mermaid conversion (mmdc not installed)")
         print()
 
     # Convert markdown to PDF
     if md_files:
         print("=" * 50)
-        print("Converting Markdown to PDF...")
-        print()
+        if PDF_AVAILABLE:
+            print("Converting Markdown to PDF...")
+            print()
 
-        md_success = 0
-        for md_file in sorted(md_files):
-            if convert_md_to_pdf(md_file):
-                md_success += 1
+            md_success = 0
+            for md_file in sorted(md_files):
+                if convert_md_to_pdf(md_file):
+                    md_success += 1
 
-        print()
-        print(f"PDFs: {md_success}/{len(md_files)} converted")
+            print()
+            print(f"PDFs: {md_success}/{len(md_files)} converted")
+        else:
+            print("Skipping PDF conversion (markdown/weasyprint not installed)")
         print()
 
     print("=" * 50)
