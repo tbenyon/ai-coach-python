@@ -99,7 +99,7 @@ def get_recent_workouts(client_id):
     # Get the most recent workouts for this client
     # ORDER BY date_time DESC puts newest first
     cursor.execute('''
-        SELECT id, client_id, date_time, miles_run, push_up_count, bench_press_weight
+        SELECT id, client_id, date_time, miles_run, push_up_count, bench_press_weight, comment
         FROM workout_log
         WHERE client_id = ?
         ORDER BY date_time DESC

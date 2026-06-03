@@ -72,7 +72,8 @@ def seed_database():
             date_time TEXT NOT NULL,
             miles_run REAL NOT NULL,
             push_up_count INTEGER NOT NULL,
-            bench_press_weight REAL NOT NULL
+            bench_press_weight REAL NOT NULL,
+            comment TEXT
         )
     ''')
     print("  'workout_log' table is ready!")
@@ -130,8 +131,8 @@ def seed_database():
     # Workout 1
     cursor.execute('SELECT id FROM workout_log WHERE client_id = ? AND date_time = ?', (tom_id, '2024-11-24 07:30:00'))
     if cursor.fetchone() is None:
-        cursor.execute('INSERT INTO workout_log (client_id, date_time, miles_run, push_up_count, bench_press_weight) VALUES (?, ?, ?, ?, ?)',
-            (tom_id, '2024-11-24 07:30:00', 2.5, 30, 135.0))
+        cursor.execute('INSERT INTO workout_log (client_id, date_time, miles_run, push_up_count, bench_press_weight, comment) VALUES (?, ?, ?, ?, ?, ?)',
+            (tom_id, '2024-11-24 07:30:00', 2.5, 30, 135.0, 'Felt good after warm-up'))
         print("  Added workout: Nov 24 - 2.5 miles, 30 push-ups, 135 lbs bench")
     else:
         print("  Workout Nov 24 already exists - skipping")
@@ -139,8 +140,8 @@ def seed_database():
     # Workout 2
     cursor.execute('SELECT id FROM workout_log WHERE client_id = ? AND date_time = ?', (tom_id, '2024-11-27 06:45:00'))
     if cursor.fetchone() is None:
-        cursor.execute('INSERT INTO workout_log (client_id, date_time, miles_run, push_up_count, bench_press_weight) VALUES (?, ?, ?, ?, ?)',
-            (tom_id, '2024-11-27 06:45:00', 3.0, 35, 140.0))
+        cursor.execute('INSERT INTO workout_log (client_id, date_time, miles_run, push_up_count, bench_press_weight, comment) VALUES (?, ?, ?, ?, ?, ?)',
+            (tom_id, '2024-11-27 06:45:00', 3.0, 35, 140.0, None))
         print("  Added workout: Nov 27 - 3.0 miles, 35 push-ups, 140 lbs bench")
     else:
         print("  Workout Nov 27 already exists - skipping")
@@ -148,8 +149,8 @@ def seed_database():
     # Workout 3
     cursor.execute('SELECT id FROM workout_log WHERE client_id = ? AND date_time = ?', (tom_id, '2024-12-01 08:00:00'))
     if cursor.fetchone() is None:
-        cursor.execute('INSERT INTO workout_log (client_id, date_time, miles_run, push_up_count, bench_press_weight) VALUES (?, ?, ?, ?, ?)',
-            (tom_id, '2024-12-01 08:00:00', 2.0, 40, 145.0))
+        cursor.execute('INSERT INTO workout_log (client_id, date_time, miles_run, push_up_count, bench_press_weight, comment) VALUES (?, ?, ?, ?, ?, ?)',
+            (tom_id, '2024-12-01 08:00:00', 2.0, 40, 145.0, 'Legs were sore from yesterday'))
         print("  Added workout: Dec 1 - 2.0 miles, 40 push-ups, 145 lbs bench")
     else:
         print("  Workout Dec 1 already exists - skipping")
@@ -157,8 +158,8 @@ def seed_database():
     # Workout 4
     cursor.execute('SELECT id FROM workout_log WHERE client_id = ? AND date_time = ?', (tom_id, '2024-12-04 07:15:00'))
     if cursor.fetchone() is None:
-        cursor.execute('INSERT INTO workout_log (client_id, date_time, miles_run, push_up_count, bench_press_weight) VALUES (?, ?, ?, ?, ?)',
-            (tom_id, '2024-12-04 07:15:00', 3.5, 45, 150.0))
+        cursor.execute('INSERT INTO workout_log (client_id, date_time, miles_run, push_up_count, bench_press_weight, comment) VALUES (?, ?, ?, ?, ?, ?)',
+            (tom_id, '2024-12-04 07:15:00', 3.5, 45, 150.0, None))
         print("  Added workout: Dec 4 - 3.5 miles, 45 push-ups, 150 lbs bench")
     else:
         print("  Workout Dec 4 already exists - skipping")
@@ -166,8 +167,8 @@ def seed_database():
     # Workout 5
     cursor.execute('SELECT id FROM workout_log WHERE client_id = ? AND date_time = ?', (tom_id, '2024-12-07 06:30:00'))
     if cursor.fetchone() is None:
-        cursor.execute('INSERT INTO workout_log (client_id, date_time, miles_run, push_up_count, bench_press_weight) VALUES (?, ?, ?, ?, ?)',
-            (tom_id, '2024-12-07 06:30:00', 4.0, 50, 155.0))
+        cursor.execute('INSERT INTO workout_log (client_id, date_time, miles_run, push_up_count, bench_press_weight, comment) VALUES (?, ?, ?, ?, ?, ?)',
+            (tom_id, '2024-12-07 06:30:00', 4.0, 50, 155.0, 'New PB on bench press!'))
         print("  Added workout: Dec 7 - 4.0 miles, 50 push-ups, 155 lbs bench")
     else:
         print("  Workout Dec 7 already exists - skipping")

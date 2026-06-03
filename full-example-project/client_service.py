@@ -68,7 +68,7 @@ def authenticate_client(username, password):
     return None
 
 
-def add_workout_log(client_id, miles_run, push_up_count, bench_press_weight):
+def add_workout_log(client_id, miles_run, push_up_count, bench_press_weight, comment=None):
     """
     Save a new workout to the database.
 
@@ -77,6 +77,7 @@ def add_workout_log(client_id, miles_run, push_up_count, bench_press_weight):
         miles_run: How many miles they ran (can be decimal like 2.5)
         push_up_count: How many push-ups they did
         bench_press_weight: How much weight they bench pressed
+        comment: Optional note about the workout (e.g. "felt strong today")
 
     Returns:
         True if the workout was saved successfully
@@ -94,9 +95,9 @@ def add_workout_log(client_id, miles_run, push_up_count, bench_press_weight):
 
     # Insert the new workout into the database
     cursor.execute('''
-        INSERT INTO workout_log (client_id, date_time, miles_run, push_up_count, bench_press_weight)
-        VALUES (?, ?, ?, ?, ?)
-    ''', (client_id, current_time, miles_run, push_up_count, bench_press_weight))
+        INSERT INTO workout_log (client_id, date_time, miles_run, push_up_count, bench_press_weight, comment)
+        VALUES (?, ?, ?, ?, ?, ?)
+    ''', (client_id, current_time, miles_run, push_up_count, bench_press_weight, comment))
 
     # Save the changes to the database
     conn.commit()

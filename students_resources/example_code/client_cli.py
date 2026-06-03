@@ -123,12 +123,17 @@ def handle_log_workout():
         print("Invalid input! Please enter a number.")
         return
 
+    # Ask for an optional comment (just press Enter to skip)
+    comment_input = input("Any comment about this workout? (press Enter to skip) ").strip()
+    comment = comment_input if comment_input else None
+
     # Save the workout to the database
     success = add_workout_log(
         current_user['id'],
         miles_run,
         push_up_count,
-        bench_press_weight
+        bench_press_weight,
+        comment
     )
 
     # Show confirmation
@@ -138,6 +143,8 @@ def handle_log_workout():
         print(f"  Miles run: {miles_run}")
         print(f"  Push-ups: {push_up_count}")
         print(f"  Bench press: {bench_press_weight} lbs")
+        if comment:
+            print(f"  Comment: {comment}")
 
 
 def main_menu():

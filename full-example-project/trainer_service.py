@@ -102,7 +102,7 @@ def get_recent_workouts(client_id, limit=3):
     # ORDER BY date_time DESC puts newest first
     # LIMIT ? restricts how many results we get
     cursor.execute('''
-        SELECT id, client_id, date_time, miles_run, push_up_count, bench_press_weight
+        SELECT id, client_id, date_time, miles_run, push_up_count, bench_press_weight, comment
         FROM workout_log
         WHERE client_id = ?
         ORDER BY date_time DESC
