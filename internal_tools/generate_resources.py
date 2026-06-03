@@ -5,11 +5,12 @@ Generate resources for student materials:
 - Convert markdown files (.md) to PDFs
 
 Requirements:
-- Python packages: pip install markdown weasyprint
+- Python packages: pip install markdown weasyprint pygments
 - Node.js package: npm install -g @mermaid-js/mermaid-cli
 """
 
 import os
+import re
 import subprocess
 from pathlib import Path
 
@@ -84,6 +85,37 @@ def convert_mermaid_to_png(mmd_file):
         return None
 
 
+_CODEHILITE_BLOCK_RE = re.compile(
+    r'<div class="codehilite">\s*<table class="codehilitetable">.*?</table>\s*</div>',
+    re.DOTALL,
+)
+_INNER_CODE_RE = re.compile(r'<code[^>]*>(.*?)</code>', re.DOTALL)
+
+
+def reformat_codehilite_blocks(html):
+    # codehilite renders line numbers in a separate <td>, so when the code
+    # column wraps the two columns desync. Flatten the table into one row
+    # per source line so each line number stays glued to its line.
+    def replace(match):
+        block = match.group(0)
+        code_match = _INNER_CODE_RE.search(block)
+        if not code_match:
+            return block
+        code_html = code_match.group(1).rstrip('\n')
+        lines = code_html.split('\n')
+        rows = []
+        for i, line in enumerate(lines, start=1):
+            line_content = line if line.strip() else '&nbsp;'
+            rows.append(
+                f'<div class="codeline">'
+                f'<span class="ln">{i}</span>'
+                f'<span class="cl">{line_content}</span>'
+                f'</div>'
+            )
+        return '<div class="codeblock">' + ''.join(rows) + '</div>'
+    return _CODEHILITE_BLOCK_RE.sub(replace, html)
+
+
 def convert_md_to_pdf(md_file):
     """
     Convert a markdown file to PDF using markdown and weasyprint.
@@ -102,7 +134,14 @@ def convert_md_to_pdf(md_file):
             md_content = f.read()
 
         # Convert markdown to HTML
-        html_content = markdown.markdown(md_content, extensions=['extra', 'codehilite', 'fenced_code', 'tables'])
+        html_content = markdown.markdown(
+            md_content,
+            extensions=['extra', 'codehilite', 'fenced_code', 'tables'],
+            extension_configs={
+                'codehilite': {'linenums': True, 'guess_lang': False},
+            },
+        )
+        html_content = reformat_codehilite_blocks(html_content)
 
         # Add basic CSS styling
         styled_html = f"""
@@ -140,13 +179,55 @@ def convert_md_to_pdf(md_file):
                     background-color: #f4f4f4;
                     padding: 15px;
                     border-radius: 5px;
-                    overflow-x: auto;
                     border: 1px solid #ddd;
+                    white-space: pre-wrap;
+                    word-break: break-word;
+                    overflow-wrap: anywhere;
                 }}
                 pre code {{
                     background-color: transparent;
                     padding: 0;
+                    white-space: pre-wrap;
+                    word-break: break-word;
+                    overflow-wrap: anywhere;
                 }}
+                /* flex-per-line code blocks (post-processed from codehilite) */
+                .codeblock {{
+                    background-color: #f4f4f4;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    padding: 12px 0;
+                    margin: 12px 0;
+                    font-family: 'Courier New', monospace;
+                    font-size: 0.9em;
+                    line-height: 1.5;
+                }}
+                .codeline {{
+                    display: flex;
+                    align-items: flex-start;
+                    padding: 0 12px;
+                }}
+                .codeline .ln {{
+                    flex: 0 0 2em;
+                    text-align: right;
+                    color: #999;
+                    padding-right: 12px;
+                    margin-right: 12px;
+                    border-right: 1px solid #ddd;
+                }}
+                .codeline .cl {{
+                    flex: 1 1 auto;
+                    min-width: 0;
+                    white-space: pre-wrap;
+                    word-break: break-word;
+                    overflow-wrap: anywhere;
+                }}
+                /* minimal Pygments token colors */
+                .codeblock .k, .codeblock .kn, .codeblock .kd {{ color: #0066cc; font-weight: bold; }}
+                .codeblock .s, .codeblock .s1, .codeblock .s2 {{ color: #008000; }}
+                .codeblock .c, .codeblock .c1, .codeblock .cm {{ color: #888; font-style: italic; }}
+                .codeblock .nb {{ color: #0066cc; }}
+                .codeblock .mi, .codeblock .mf {{ color: #aa5500; }}
                 hr {{
                     border: none;
                     border-top: 1px solid #ddd;
