@@ -1,6 +1,4 @@
-# Import our AI service
 from ai_service import call_ai
-
 
 def main():
     """Ask the AI to write a poem about Python."""
@@ -43,7 +41,7 @@ if __name__ == "__main__":
 # ============================================================
 # While you wait for others to catch up, think about:
 #
-# 1. Look at the code in this file - what do you think call_ai(prompt) does?
+# 1. Look at the code in this file - what do you think response = call_ai(prompt) does?
 #
 # 2. What would happen if you changed the prompt to ask for something different?
 #    (Try it!)
@@ -55,3 +53,7 @@ if __name__ == "__main__":
 #    the AI?
 #
 # 5. Why do we check "if response is None"? What could go wrong?
+#
+# 6. Could you get the prompt from the user?
+#
+# 7. Could you reject the AI generation if the user types 67?
