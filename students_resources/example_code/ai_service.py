@@ -1,4 +1,4 @@
-    """
+"""
 ai_service.py - OpenAI Integration for AI Feedback
 
 This file handles all communication with the OpenAI API.
