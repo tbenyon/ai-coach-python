@@ -4,6 +4,8 @@ In this phase, you'll set up your fitness tracking application and explore how i
 
 ## Running the Application
 
+> ⚠ **If you get an error when you run `trainer_cli.py`** — especially something starting with `sqlite3.OperationalError` — open [`documentation/troubleshooting.md`](documentation/troubleshooting.md) and look for your error message. The most common fix is to delete `coaching_app.db` and re-run `python3 db.py`.
+
 ### Trainer App
 
 Run `trainer_cli.py` and try these options:
