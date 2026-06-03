@@ -89,7 +89,7 @@ Checks if login credentials are correct.
 - **Returns:** Client dictionary if login successful, `None` if failed
 - **SQL:** `SELECT ... FROM clients WHERE username = ? AND password = ?`
 
-#### `add_workout_log(client_id, miles_run, push_up_count, bench_press_weight)`
+#### `add_workout_log(client_id, miles_run, push_up_count, bench_press_weight, comment=None)`
 Saves a new workout to the database.
 
 - **Parameters:**
@@ -97,6 +97,7 @@ Saves a new workout to the database.
   - `miles_run` - Miles run (decimal)
   - `push_up_count` - Number of push-ups (integer)
   - `bench_press_weight` - Bench press weight in lbs (decimal)
+  - `comment` - Optional note about the workout (e.g. "felt strong today"). Pass `None` or omit if not needed.
 - **Returns:** `True` if successful
 - **SQL:** `INSERT INTO workout_log ...`
 
@@ -246,6 +247,7 @@ Sends a prompt to OpenAI and gets a response.
 | miles_run | REAL | Miles run |
 | push_up_count | INTEGER | Number of push-ups |
 | bench_press_weight | REAL | Bench press weight (lbs) |
+| comment | TEXT | Optional note about the workout (nullable) |
 
 ### nutrition_log
 | Column | Type | Description |
